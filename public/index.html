@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a>nfffiifi</a>
+<input type="text"  name="" id="mess">
+<button id="send">send</button>
+<!-- resive mess -->
+<div id="backendMess" style="display: flex;flex-direction: column;">
+ </div>
+
+    <script src="/socket.io/socket.io.js">
+
+    </script>
+    <script>
+// for connection
+        const socket=io();
+
+        let send=document.getElementById('send')
+        let mess=document.getElementById('mess')
+        let backend_mess=document.getElementById("backendMess");
+
+        send.addEventListener('click',(e)=>{
+            let message=mess.value;
+            // console.log(message);
+            // send or go this message in baceknd
+            socket.emit('user-mesage',message)
+        })
+
+
+// resive server message (baken tp pass name user below line)
+socket.on('message',(message)=>{
+// console.log(message)
+ let p=document.createElement("p");
+p.innerText=message;
+backend_mess.appendChild(p)
+
+})
+
+ 
+
+    </script>
+</body>
+</html>
